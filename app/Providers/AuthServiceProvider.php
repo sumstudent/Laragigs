@@ -24,7 +24,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        
+        Gate::define('listing_create', fn(User $user) => $user->is_admin);
+        Gate::define('listing_edit', fn(User $user) => $user->is_admin);
+        Gate::define('listing_delete', fn(User $user) => $user->is_admin);
     }
 }
