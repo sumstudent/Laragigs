@@ -32,7 +32,7 @@ Route::get("/listings/{listing}/edit", [ListingController::class, "edit"])->midd
 Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('is_admin');
 
 //Update listing
-Route::put("/listings/{listing}", [ListingController::class, "update"])->middleware('auth');
+Route::put("/listings/{listing}", [ListingController::class, "update"])->middleware('is_admin');
 
 //Show Delete form
 Route::delete("/listings/{listing}", [ListingController::class, "delete"])->middleware('is_admin');

@@ -35,10 +35,13 @@
                     Welcome {{auth()->user()->email}}
                 </span>
             </li>
+            @if (auth()->user()->is_admin)
             <li>
                 <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
                     Manage Listings</a>
             </li>
+            @endif
+
             <li>
                 <form action="/logout" method="POST" class="inline">
                     @csrf
