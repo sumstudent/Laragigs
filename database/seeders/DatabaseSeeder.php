@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Listing;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+    const tags = ["React", 'Api', 'Laravel', 'PHP','Back-end','Front-end','Full-stack'];
     public function run()
     {
         // \App\Models\User::factory(10)->create();
@@ -20,38 +22,45 @@ class DatabaseSeeder extends Seeder
         //I still have not figured out on how to handle in making an admin account,
         // So I just hardcoded an admin account
         $user = User::factory()->create([
-            'name' => 'John Doe',
-            'email' => 'john@gmail.com',
-            'is_admin' => '1',
-            'password' => bcrypt('admin1234'),
-        ]);
-        
-        
-
-        Listing::factory(6)->create([
-            'user_id' => $user->id
+            "name" => "John Doe",
+            "email" => "john@gmail.com",
+            "is_admin" => "1",
+            "password" => bcrypt("admin1234"),
         ]);
 
-        // Listing::create([
-        //     "title" => "Laravel Senior Developer",
-        //     "tags" => "laravel, javascript",
-        //     "company" => "Acme Corp",
-        //     "location" => "Boston, MA",
-        //     "email" => "email1@email.com",
-        //     "website" => "https://www.acme.com",
-        //     "description" =>
-        //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?",
+        $listing = Listing::factory(6)->create([
+            "user_id" => $user->id,
+        ]);
+        
+        //For the time being, im making tag manually. But eventually I will make it with a factory
+
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "React",
         // ]);
-
-        // Listing::create([
-        //     "title" => "Full-Stack Engineer",
-        //     "tags" => "laravel, backend ,api",
-        //     "company" => "Stark Industries",
-        //     "location" => "New York, NY",
-        //     "email" => "email2@email.com",
-        //     "website" => "https://www.starkindustries.com",
-        //     "description" =>
-        //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?",
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "Api",
+        // ]);
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "Laravel",
+        // ]);
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "PHP",
+        // ]);
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "Back-end",
+        // ]);
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "Front-end",
+        // ]);
+        // Tag::create([
+        //     "tag_id" => $listing->id,
+        //     "tag_name" => "Full-stack",
         // ]);
     }
 }
