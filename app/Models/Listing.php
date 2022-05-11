@@ -12,7 +12,7 @@ class Listing extends Model
 
     protected $fillable = [
         "title",
-        'user_id',
+        "user_id",
         "logo",
         "tags",
         "company",
@@ -34,10 +34,24 @@ class Listing extends Model
                 ->orWhere("description", "Like", "%" . request("search") . "%")
                 ->orWhere("tags", "Like", "%" . request("search") . "%");
         }
+        if ($filters["order"] ?? false) {
+            if ($filters["order"] === "latest") {
+                $query
+                    ->select("*")
+                    ->orderBy("updated_at", 'DESC')
+                    ->get();
+            } elseif ($filters["order"] === "oldest") {
+                $query
+                    ->select("*")
+                    ->orderBy("updated_at", 'ASC')
+                    ->get();
+            }
+        }
     }
 
     //Relationship to user
-    public function user(){
-        return $this->belongsTo(User::class, 'user_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, "user_id");
     }
 }
