@@ -24,16 +24,18 @@ class Listing extends Model
 
     public function scopeFilter($query, array $filters)
     {
+        //Tags Functionality
         if ($filters["tag"] ?? false) {
             $query->where("tags", "Like", "%" . request("tag") . "%");
         }
-
+        //Search Functionality
         if ($filters["search"] ?? false) {
             $query
                 ->where("title", "Like", "%" . request("search") . "%")
                 ->orWhere("description", "Like", "%" . request("search") . "%")
                 ->orWhere("tags", "Like", "%" . request("search") . "%");
         }
+        //Sorting Functionality
         if ($filters["order"] ?? false) {
             if ($filters["order"] === "latest") {
                 $query
